@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Home from './containers/home';
+
+
 
 class App extends Component {
+  
+  // handleClick() {
+  //   alert('click on option 1');
+  // }
+  componentDidMount() {
+    
+  }
   render() {
+   
     return (
       <div className="App">
-        <header className="App-header">
+        <Home/>
+        {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -19,7 +31,8 @@ class App extends Component {
           >
             Learn React
           </a>
-        </header>
+        </header> */}
+        
       </div>
     );
   }
