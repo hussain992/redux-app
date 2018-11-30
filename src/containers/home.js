@@ -10,7 +10,8 @@ class Home extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        selectedValue: null,
+          selectedValue: '',
+          // BookedSlot :[]
       }
   }
   handleChange = (e) => {
@@ -30,15 +31,27 @@ class Home extends Component {
         state:{time:e.target.value}
       });
   }
-    
-  render() {
+  checkslot (slot) {
+    const tempData = this.props.userData;
+    let  flag = false;
+    map(tempData, (val, key) => {
+      // bookedSlot.push(val.time);
+      if(val.time == slot) {
+        flag=true;
+      }
+    })
+    return flag;
+  }
+    render() {
       console.log('props', this.props);
-      const tempData = this.props.userData;    
-      const bookedSlot = [];
-      map(tempData,(val, key) => {
-        bookedSlot.push(val.time);
-      })
-      console.log("BookedSlot: ", bookedSlot);
+    //  this.checkslot
+      // const bookedSlot = [];
+      // map(tempData,(val, key) => {
+      //   bookedSlot.push(val.time);
+      // })
+
+      
+
     return (
       <div style={{backgroundColor: "#f6f6f6", padding: '50px'}}>
         <Container>
@@ -58,11 +71,10 @@ class Home extends Component {
                   value={this.state.selectedValue} 
                   onChange={this.handleChange}
                   >
-                  <option disabled selected value={null}>Please select time slot</option>
-                  <option style={bookedSlot.indexOf('9') > -1  ? {backgroundColor: 'red', color: 'white'} : null} value="9">9AM</option>
-                  <option style={bookedSlot.indexOf('10') > -1  ? {backgroundColor: 'red', color: 'white'} : null} value="10">10AM</option>
-                  <option style={bookedSlot.indexOf('11') > -1  ? {backgroundColor: 'red', color: 'white'} : null} value="11">11AM</option>
-                  <option style={bookedSlot.indexOf('12') > -1  ? {backgroundColor: 'red', color: 'white'} : null} value="12">12PM</option>
+                  <option value="9">9AM</option>
+                  <option  style={this.checkslot(10) ? {backgroundColor: 'red'} : {}} value="10">10AM</option>
+                  <option value="11">11AM</option>
+                  <option value="12">12PM</option>
                 </Input>
               </FormGroup>
               </Form>
