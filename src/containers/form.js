@@ -41,26 +41,26 @@ class FormContainer extends Component {
       })
     }
   onSubmit = (e) => {
-    e.preventDefault();
     let data ={
       time: this.props.location.state.time,
       first: this.state.first,
       last: this.state.last,
       mobile: this.state.mobile,
     }
+    e.preventDefault();
     this.props.onCreateNewItem(data);
     history.push('/');
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  componentDidMount() {
     let defaultSlot = {};
-    map(nextProps.userData, (val, key)=> {
-      if(val.time === get(nextProps,'location.state.time')) {
+    map(this.props.userData, (val, key) => {
+      if (val.time === get(this.props, 'location.state.time')) {
         // delete val.time
         defaultSlot = val;
       }
     })
-    return defaultSlot
+    this.setState(defaultSlot)
   }
 
   render() {
